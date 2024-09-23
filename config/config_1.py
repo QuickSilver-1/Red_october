@@ -1,6 +1,6 @@
 TOKEN = "7422154266:AAFn3WlIlsrJPduTKo2aHzNwJdKnBP0SUok"
 
-ip = '185.218.0.57'
+ip = 'localhost'
 PGUSER = 'roman'
 PGPASSWORD = '1234'
 DATABASE = 'october'
