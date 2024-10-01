@@ -129,7 +129,7 @@ def agree_kb():
     builder = InlineKeyboardBuilder()
 
     builder.button(
-        text="Отправить", callback_data="Отправитьг"
+        text="Отправить", callback_data="Отправить"
     )
 
     builder.adjust(1)
