@@ -3,52 +3,6 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder, ReplyKeyboardBuilder
 from media import *
 
 
-def admin_kb():
-    builder = InlineKeyboardBuilder()
-
-    builder.button(
-        text="Настроить рассылку", callback_data="Настроить рассылку"
-    )
-    builder.button(
-        text="Попробовать функции пользователя", callback_data="Попробовать функции пользователя"
-    )
-    builder.button(
-        text="Розыгрыш", callback_data="Рандом"
-    )
-
-    builder.adjust(1)
-    return builder.as_markup()
-
-def are_you_sure():
-    builder = InlineKeyboardBuilder()
-    builder.button(
-        text="Да", callback_data="Да"
-    )
-    builder.button(
-        text="Нет", callback_data="Нет"
-    )
-    builder.adjust(1)
-    return builder.as_markup()
-
-def back_reply_kb():
-    builder = ReplyKeyboardBuilder()
-    builder.button(
-        text="Вернуться в админ-панель",
-    )
-
-    builder.adjust(1)
-    return builder.as_markup(resize_keyboard=True)
-
-def inline_kb_builder(callback: str) -> InlineKeyboardMarkup:
-    builder = InlineKeyboardBuilder()
-
-    builder.button(
-        text=callback_keys[callback],
-        callback_data=callback
-    )
-
-    return builder.as_markup(resize_keyboard=True)
-
 def contact_keyboard():
     builder = ReplyKeyboardBuilder()
 
@@ -58,6 +12,22 @@ def contact_keyboard():
     
     builder.adjust(1)
     return builder.as_markup(resize_keyboard=True)
+
+def reg_side():
+    builder = InlineKeyboardBuilder()
+
+    builder.button(
+        text="Intimissimi", callback_data="Intimissimi"
+    )
+    builder.button(
+        text="Интершарм", callback_data="Интершарм"
+    )
+    builder.button(
+        text="Главное меню", callback_data="Главное меню"
+    )
+
+    builder.adjust(1)
+    return builder.as_markup()
 
 def main_menu_kb():
     builder = InlineKeyboardBuilder()
@@ -75,10 +45,10 @@ def main_menu_kb():
         text="Горячая линия", callback_data="Линия"
     )
     builder.button(
-        text="5 шагов к здоровью груди", callback_data="5 шагов"
+        text="Пособие по самодиагностике", callback_data="Пособие по самодиагностике"
     )
     builder.button(
-        text="Мерч", callback_data="Мерч"
+        text="РО2024", callback_data="РО2024"
     )
 
     builder.adjust(1)
@@ -137,6 +107,29 @@ def bot_kb():
     )
     builder.button(
         text="Главное меню", callback_data="Главное меню"
+    )
+
+    builder.adjust(1)
+    return builder.as_markup()
+
+def RO2024_kb():
+    builder = InlineKeyboardBuilder()
+
+    builder.button(
+        text="Пожертвования", url="https://dalshefond.ru/donate/"
+    )
+    builder.button(
+        text="Главное меню", callback_data="Главное меню"
+    )
+
+    builder.adjust(1)
+    return builder.as_markup()
+
+def agree_kb():
+    builder = InlineKeyboardBuilder()
+
+    builder.button(
+        text="Отправить", callback_data="Отправитьг"
     )
 
     builder.adjust(1)
