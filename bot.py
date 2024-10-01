@@ -93,8 +93,8 @@ async def reg_agree(message: Message, state: FSMContext) -> None:
         await state.update_data(number=message.contact.phone_number)
     except:
         await state.update_data(number=message.text)
-        
-    await message.answer_document(document=agree_doc, caption=agree_text, reply_markup=agree_kb())
+
+    await message.answer_document(document=agree_doc, caption=agree_text, reply_markup=agree_kb(), parse_mode="HTML")
     
 @dp.callback_query(F.data == "Отправить")
 async def reg_final(callback: CallbackQuery, state: FSMContext) -> None:
