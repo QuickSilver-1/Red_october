@@ -27,6 +27,9 @@ def moscow_kb():
     builder.button(
         text="Выставка InterCHARM", callback_data="Выставка"
     )
+    builder.button(
+        text="Главное меню", callback_data="Главное меню"
+    )
 
     builder.adjust(1)
     return builder.as_markup()    
@@ -71,6 +74,9 @@ def more_kb():
     )
     builder.button(
         text="Чек-лист заботы о здоровье груди(нужен файл)", callback_data="РО2024"
+    )
+    builder.button(
+        text="Главное меню", callback_data="Главное меню"
     )
 
     builder.adjust(1)
@@ -148,6 +154,9 @@ def help_kb():
     )
     builder.button(
         text="Руководство для пациентов с диагнозом рак груди", url="https://www.dalshefond.ru/practical-guide/"
+    )
+    builder.button(
+        text="Главное меню", callback_data="Главное меню"
     )
 
     builder.adjust(1)
