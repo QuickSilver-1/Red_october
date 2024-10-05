@@ -1,4 +1,3 @@
-from aiogram.types import InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder, ReplyKeyboardBuilder
 from media import *
 
@@ -128,25 +127,6 @@ def main_menu_kb():
     builder.button(
         text="Получить помощь", callback_data="Помощь"
     )
-    
-    # builder.button(
-    #     text="Записаться на акцию", callback_data="Запись"
-    # )
-    # builder.button(
-    #     text="Беспроигрышная лотерея", callback_data="Лотерея"
-    # )
-    # builder.button(
-    #     text="Познакомиться с Фондом", callback_data="Фонд"
-    # )
-    # builder.button(
-    #     text="Горячая линия", callback_data="Линия"
-    # )
-    # builder.button(
-    #     text="Пособие по самодиагностике", callback_data="Пособие по самодиагностике"
-    # )
-    # builder.button(
-    #     text="РО2024", callback_data="РО2024"
-    # )
 
     builder.adjust(1)
     return builder.as_markup()

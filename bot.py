@@ -31,10 +31,6 @@ async def cmd_start(message: Message):
 
     await message.answer(text=hello1_text.format(name=message.from_user.first_name), reply_markup=start_kb())
 
-@dp.callback_query(F.data == "Запись")
-async def register(callback: CallbackQuery):
-    await callback.message.answer(text=side_text, reply_markup=reg_side())
-
 @dp.callback_query(F.data == "Intimissimi")
 async def intimissimi(callback: CallbackQuery, state: FSMContext):
     wb = openpyxl.load_workbook("intimissimi.xlsx")
@@ -126,17 +122,9 @@ async def main_menu(callback: CallbackQuery):
     await callback.message.delete()
     await callback.message.answer(text=main_text, reply_markup=main_menu_kb())
 
-@dp.callback_query(F.data == "Фонд")
-async def get_information(callback: CallbackQuery):
-    await callback.message.answer(text=info_text, reply_markup=information_kb())
-
 @dp.callback_query(F.data == "Линия")
 async def hot_line(callback: CallbackQuery):
     await callback.message.answer(text=line_text, reply_markup=bot_kb())
-    
-@dp.callback_query(F.data == "РО2024")
-async def ro2024(callback: CallbackQuery):
-    await callback.message.answer(text=RO2024_text, reply_markup=RO2024_kb())
 
 @dp.callback_query(F.data == "Узнать")
 async def more(callback: CallbackQuery):
