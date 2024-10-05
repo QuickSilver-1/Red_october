@@ -40,7 +40,7 @@ async def intimissimi(callback: CallbackQuery, state: FSMContext):
     wb = openpyxl.load_workbook("intimissimi.xlsx")
     user = [i[0] for i in wb['Sheet1'].values]
     if callback.from_user.id in user:
-        await callback.message.answer(text="Вы уже зарегестрированы на это мероприятие")
+        await callback.message.answer(text="Вы уже зарегистрированы на это мероприятие")
     else:
         await state.set_state(Register.fio)
         await state.update_data(username=callback.message.from_user.username, tg_id=callback.message.from_user.id, types="intimissimi")
@@ -135,8 +135,66 @@ async def hot_line(callback: CallbackQuery):
     await callback.message.answer(text=line_text, reply_markup=bot_kb())
     
 @dp.callback_query(F.data == "РО2024")
-async def hot_line(callback: CallbackQuery):
+async def ro2024(callback: CallbackQuery):
     await callback.message.answer(text=RO2024_text, reply_markup=RO2024_kb())
+
+@dp.callback_query(F.data == "Узнать")
+async def more(callback: CallbackQuery):
+    await callback.message.answer(text="Хорошо, вот, что я могу предложить", reply_markup=more_kb())
+
+@dp.callback_query(F.data == "Спросить")
+async def ask_doctor(callback: CallbackQuery):
+    await callback.message.answer(text="Хоитите получить консультацию онкомаммолога?", reply_markup=consultation_kb())
+
+@dp.callback_query(F.data == "Онлайн")
+async def online(callback: CallbackQuery):
+    await callback.message.answer(text='Онлайн марафон "5 шагов к здоровью груди"')
+    
+@dp.callback_query(F.data == "Очно")
+async def ochno(callback: CallbackQuery):
+    await callback.message.answer(text='Выберите город', reply_markup=city_kb())
+    
+@dp.callback_query(F.data == "Москва")
+async def moscow(callback: CallbackQuery):
+    await callback.message.answer(text=moscow_text, reply_markup=moscow_kb())
+    
+@dp.callback_query(F.data == "Европейский")
+async def europe(callback: CallbackQuery):
+    await callback.message.answer(text=europe_text, reply_markup=reg_intimissimi_kb())
+    
+@dp.callback_query(F.data == "Авиапарк")
+async def aviapark(callback: CallbackQuery):
+    await callback.message.answer(text=aviapark_text, reply_markup=reg_intimissimi_kb())
+    
+@dp.callback_query(F.data == "Метрополис")
+async def metropolis(callback: CallbackQuery):
+    await callback.message.answer(text=metropolis_text, reply_markup=reg_intimissimi_kb())
+    
+@dp.callback_query(F.data == "Выставка")
+async def intersharm(callback: CallbackQuery):
+    await callback.message.answer(text=intersharm_text, reply_markup=reg_intersharm_kb())
+
+@dp.callback_query(F.data == "Воронеж")
+async def voronezh(callback: CallbackQuery):
+    await callback.message.answer(text=voronezh_text, reply_markup=menu_kb())
+    
+@dp.callback_query(F.data == "Казань")
+async def kazan(callback: CallbackQuery):
+    await callback.message.answer(text=kazan_text, reply_markup=menu_kb())
+    
+@dp.callback_query(F.data == "Нижний Новгород")
+async def nizhnii(callback: CallbackQuery):
+    await callback.message.answer(text=nizhnii_text, reply_markup=menu_kb())
+    
+@dp.callback_query(F.data == "Сочи")
+async def sochi(callback: CallbackQuery):
+    await callback.message.answer(text=sochi_text, reply_markup=menu_kb())
+    
+@dp.callback_query(F.data == "Помощь")
+async def help(callback: CallbackQuery):
+    await callback.message.answer(text="Хорошо, вот, что я могу предложить", reply_markup=help_kb())
+    
+
 
 
 
