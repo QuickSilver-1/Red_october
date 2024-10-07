@@ -63,4 +63,4 @@ firth_quest_text = '''Задание 4. Сделайте пожертвован�
 '''
 
 agree_doc = "BQACAgIAAxkBAAIB9Wb79QkqHSvn6Hdvt4qcSpWKF0hrAALbUQACLLfgS4m8MQ9RKruONgQ"
-
+file_doc = "BQACAgIAAxkBAAIELWcDikmxtqqxukHmTrT3fzwyoOw7AAJKUwACKzEISAXrqiu_2LFUNgQ"

@@ -73,7 +73,7 @@ def more_kb():
         text="Пособие по профилактике рака груди", url="https://www.dalshefond.ru/prevention-manual/"
     )
     builder.button(
-        text="Чек-лист заботы о здоровье груди(нужен файл)", callback_data="РО2024"
+        text="Чек-лист заботы о здоровье груди", callback_data="Файл"
     )
     builder.button(
         text="Главное меню", callback_data="Главное меню"
@@ -89,7 +89,7 @@ def consultation_kb():
         text="Очно", callback_data="Очно"
     )
     builder.button(
-        text="Онлайн", callback_data="Онлайн"
+        text="Онлайн", url="https://t.me/dalshefond"
     )
     
     builder.adjust(2)

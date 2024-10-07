@@ -3,6 +3,7 @@ from aiogram.fsm.state import State, StatesGroup
 from aiogram import Bot, Dispatcher, F
 from aiogram.filters import CommandStart
 from aiogram.types import Message, CallbackQuery, ReplyKeyboardRemove
+from numpy import place
 from keyboards import *
 from media import *
 from config import config_1
@@ -20,11 +21,11 @@ class Register(StatesGroup):
     mail = State()
     number = State()
 
-# @dp.message(F.document)
-# async def photo_handler(message: Message) -> None:
-#     photo_data = message.document
+@dp.message(F.document)
+async def photo_handler(message: Message) -> None:
+    photo_data = message.document
 
-#     await message.answer(f'{photo_data}')
+    await message.answer(f'{photo_data}')
 
 @dp.message(CommandStart())
 async def cmd_start(message: Message):
@@ -38,7 +39,6 @@ async def intimissimi(callback: CallbackQuery, state: FSMContext):
     if callback.from_user.id in user:
         await callback.message.answer(text="Вы уже зарегистрированы на это мероприятие")
     else:
-        await state.set_state(Register.fio)
         await state.update_data(username=callback.message.from_user.username, tg_id=callback.message.from_user.id, types="intimissimi")
         await callback.message.answer(text="Расскажите немного о себе. Введите своё ФИО")
 
@@ -103,18 +103,22 @@ async def reg_final(callback: CallbackQuery, state: FSMContext) -> None:
     email = data["email"]
     number = data["number"]
     types = data["types"]
+    place = data.get("place", "")
     await state.clear()
-    await create_user(tg_id, username, fio, age, city, email, number, types)
+    await create_user(tg_id, username, fio, age, city, email, number, types, place)
     await callback.message.answer(text=thx_text, reply_markup=ReplyKeyboardRemove())
     await callback.message.answer(text=main_text, reply_markup=main_menu_kb())
 
-async def create_user(tg_id, username, fio, age, city, email, number, types):
+async def create_user(tg_id, username, fio, age, city, email, number, types, place):
     if types == "intimissimi":
         wb = openpyxl.load_workbook("intimissimi.xlsx")
+        sheet = wb["Sheet1"]
+        sheet.append([tg_id, username, fio, age, city, email, number, place])
     else:
         wb = openpyxl.load_workbook("intersharm.xlsx")
-    sheet = wb["Sheet1"]
-    sheet.append([tg_id, username, fio, age, city, email, number])
+        sheet = wb["Sheet1"]
+        sheet.append([tg_id, username, fio, age, city, email, number])
+    
     wb.save(types + ".xlsx")
 
 @dp.callback_query(F.data == "Главное меню")
@@ -134,10 +138,6 @@ async def more(callback: CallbackQuery):
 async def ask_doctor(callback: CallbackQuery):
     await callback.message.answer(text="Хоитите получить консультацию онкомаммолога?", reply_markup=consultation_kb())
 
-@dp.callback_query(F.data == "Онлайн")
-async def online(callback: CallbackQuery):
-    await callback.message.answer(text='Онлайн марафон "5 шагов к здоровью груди"')
-    
 @dp.callback_query(F.data == "Очно")
 async def ochno(callback: CallbackQuery):
     await callback.message.answer(text='Выберите город', reply_markup=city_kb())
@@ -147,15 +147,21 @@ async def moscow(callback: CallbackQuery):
     await callback.message.answer(text=moscow_text, reply_markup=moscow_kb())
     
 @dp.callback_query(F.data == "Европейский")
-async def europe(callback: CallbackQuery):
+async def europe(callback: CallbackQuery, state: FSMContext):
+    await state.set_state(Register.fio)
+    await state.update_data(place="Европейский")
     await callback.message.answer(text=europe_text, reply_markup=reg_intimissimi_kb())
     
 @dp.callback_query(F.data == "Авиапарк")
-async def aviapark(callback: CallbackQuery):
+async def aviapark(callback: CallbackQuery, state: FSMContext):
+    await state.set_state(Register.fio)
+    await state.update_data(place="Авиапарк")
     await callback.message.answer(text=aviapark_text, reply_markup=reg_intimissimi_kb())
     
 @dp.callback_query(F.data == "Метрополис")
-async def metropolis(callback: CallbackQuery):
+async def metropolis(callback: CallbackQuery, state: FSMContext):
+    await state.set_state(Register.fio)
+    await state.update_data(place="Метрополис")
     await callback.message.answer(text=metropolis_text, reply_markup=reg_intimissimi_kb())
     
 @dp.callback_query(F.data == "Выставка")
@@ -202,8 +208,6 @@ async def third_quest(callback: CallbackQuery):
 async def firth_quest(callback: CallbackQuery):
     await callback.message.answer(text=firth_quest_text, reply_markup=menu_kb())
     
-
-
-
-
-
+@dp.callback_query(F.data == "Файл")
+async def firth_quest(callback: CallbackQuery):
+    await callback.message.answer_document(document=file_doc, caption="Читайте пособие и проверяйте себя", reply_markup=menu_kb())
