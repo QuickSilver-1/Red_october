@@ -42,6 +42,7 @@ async def intimissimi(callback: CallbackQuery, state: FSMContext):
             await callback.message.answer(text="Вы уже зарегистрированы на это мероприятие")
             return
     
+    await state.set_state(Register.fio)
     await state.update_data(username=callback.message.from_user.username, tg_id=callback.message.from_user.id, types="intimissimi")
     await callback.message.answer(text="Расскажите немного о себе. Введите своё ФИО")
 
