@@ -182,6 +182,27 @@ async def sochi(callback: CallbackQuery):
 async def help(callback: CallbackQuery):
     await callback.message.answer(text="Хорошо, вот, что я могу предложить", reply_markup=help_kb())
     
+@dp.callback_query(F.data == "Квест")
+async def quest(callback: CallbackQuery):
+    await callback.message.answer(text=quest_text, reply_markup=quest_kb())
+    
+@dp.callback_query(F.data == "Задание 1")
+async def first_quest(callback: CallbackQuery):
+    await callback.message.answer(text=first_quest_text, reply_markup=first_kb())
+    
+@dp.callback_query(F.data == "Задание 2")
+async def second_quest(callback: CallbackQuery):
+    await callback.message.answer(text=second_quest_text, reply_markup=second_kb())
+    
+@dp.callback_query(F.data == "Задание 3")
+async def third_quest(callback: CallbackQuery):
+    await callback.message.answer(text=third_quest_text, reply_markup=third_kb())
+    
+@dp.callback_query(F.data == "Задание 4")
+async def firth_quest(callback: CallbackQuery):
+    await callback.message.answer(text=first_quest_text, reply_markup=first_kb())
+    
+
 
 
 

@@ -128,6 +128,9 @@ def main_menu_kb():
         text="Спросить врача", callback_data="Спросить"
     )
     builder.button(
+        text="Квест InterCHARM", callback_data="Квест"
+    )
+    builder.button(
         text="Помочь", url="https://dalshefond.ru/donate/"
     )
     builder.button(
@@ -248,6 +251,70 @@ def agree_kb():
 
     builder.button(
         text="Отправить", callback_data="Отправить"
+    )
+
+    builder.adjust(1)
+    return builder.as_markup()
+
+def quest_kb():
+    builder = InlineKeyboardBuilder()
+
+    builder.button(
+        text="Задание 1", callback_data="Задание 1"
+    )
+    builder.button(
+        text="Задание 2", callback_data="Задание 2"
+    )
+    builder.button(
+        text="Задание 3", callback_data="Задание 3"
+    )
+    builder.button(
+        text="Задание 4", callback_data="Задание 4"
+    )
+
+    builder.adjust(1)
+    return builder.as_markup()
+
+def first_kb():
+    builder = InlineKeyboardBuilder()
+
+    builder.button(
+        text="Регистрация", callback_data="Интершарм"
+    )
+    builder.button(
+        text="Задание 2", callback_data="Задание 2"
+    )
+    builder.button(
+        text="Главное меню", callback_data="Главное меню"
+    )
+
+    builder.adjust(1)
+    return builder.as_markup()
+
+def second_kb():
+    builder = InlineKeyboardBuilder()
+
+    builder.button(
+        text="Задание 3", callback_data="Задание 3"
+    )
+    builder.button(
+        text="Главное меню", callback_data="Главное меню"
+    )
+
+    builder.adjust(1)
+    return builder.as_markup()
+
+def third_kb():
+    builder = InlineKeyboardBuilder()
+
+    builder.button(
+        text="Помочь", url="https://dalshefond.ru/donate/"
+    )
+    builder.button(
+        text="Задание 4", callback_data="Задание 4"
+    )
+    builder.button(
+        text="Главное меню", callback_data="Главное меню"
     )
 
     builder.adjust(1)
