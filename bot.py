@@ -3,6 +3,7 @@ from aiogram.fsm.state import State, StatesGroup
 from aiogram import Bot, Dispatcher, F
 from aiogram.filters import CommandStart
 from aiogram.types import Message, CallbackQuery, ReplyKeyboardRemove
+from numpy import place
 from keyboards import *
 from media import *
 from config import config_1
@@ -34,12 +35,15 @@ async def cmd_start(message: Message):
 @dp.callback_query(F.data == "Intimissimi")
 async def intimissimi(callback: CallbackQuery, state: FSMContext):
     wb = openpyxl.load_workbook("intimissimi.xlsx")
-    user = [i[0] for i in wb['Sheet1'].values]
-    if callback.from_user.id in user:
-        await callback.message.answer(text="Вы уже зарегистрированы на это мероприятие")
-    else:
-        await state.update_data(username=callback.message.from_user.username, tg_id=callback.message.from_user.id, types="intimissimi")
-        await callback.message.answer(text="Расскажите немного о себе. Введите своё ФИО")
+    user = [(i[0], i[7]) for i in wb['Sheet1'].values]
+    data = state.get_data()
+    for i in user:
+        if callback.from_user.id == i[0] and data["place"] in i:
+            await callback.message.answer(text="Вы уже зарегистрированы на это мероприятие")
+            return
+    
+    await state.update_data(username=callback.message.from_user.username, tg_id=callback.message.from_user.id, types="intimissimi")
+    await callback.message.answer(text="Расскажите немного о себе. Введите своё ФИО")
 
 @dp.callback_query(F.data == "Интершарм")
 async def intersharm(callback: CallbackQuery, state: FSMContext):
@@ -102,7 +106,7 @@ async def reg_final(callback: CallbackQuery, state: FSMContext) -> None:
     email = data["email"]
     number = data["number"]
     types = data["types"]
-    place = data.get("place", "")
+    place = data["place"]
     await state.clear()
     await create_user(tg_id, username, fio, age, city, email, number, types, place)
     await callback.message.answer(text=thx_text, reply_markup=ReplyKeyboardRemove())
