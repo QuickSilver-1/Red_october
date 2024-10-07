@@ -25,9 +25,6 @@ def moscow_kb():
         text='ТЦ "Метрополис"', callback_data="Метрополис"
     )
     builder.button(
-        text="Выставка InterCHARM", callback_data="Выставка"
-    )
-    builder.button(
         text="Главное меню", callback_data="Главное меню"
     )
 
