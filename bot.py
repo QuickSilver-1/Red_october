@@ -35,7 +35,7 @@ async def cmd_start(message: Message):
 async def intimissimi(callback: CallbackQuery, state: FSMContext):
     wb = openpyxl.load_workbook("intimissimi.xlsx")
     user = [(i[0], i[7]) for i in wb['Sheet1'].values]
-    data = state.get_data()
+    data = await state.get_data()
     for i in user:
         if callback.from_user.id == i[0] and data["place"] in i:
             await callback.message.answer(text="Вы уже зарегистрированы на это мероприятие")
