@@ -14,6 +14,7 @@ dp = Dispatcher()
 bot = Bot(token=config_1.TOKEN)
 
 class Register(StatesGroup):
+    place = State()
     fio = State()
     age = State()
     city = State()
@@ -150,19 +151,19 @@ async def moscow(callback: CallbackQuery):
     
 @dp.callback_query(F.data == "Европейский")
 async def europe(callback: CallbackQuery, state: FSMContext):
-    await state.set_state(Register.fio)
+    await state.set_state(Register.place)
     await state.update_data(place="Европейский")
     await callback.message.answer(text=europe_text, reply_markup=reg_intimissimi_kb())
     
 @dp.callback_query(F.data == "Авиапарк")
 async def aviapark(callback: CallbackQuery, state: FSMContext):
-    await state.set_state(Register.fio)
+    await state.set_state(Register.place)
     await state.update_data(place="Авиапарк")
     await callback.message.answer(text=aviapark_text, reply_markup=reg_intimissimi_kb())
     
 @dp.callback_query(F.data == "Метрополис")
 async def metropolis(callback: CallbackQuery, state: FSMContext):
-    await state.set_state(Register.fio)
+    await state.set_state(Register.place)
     await state.update_data(place="Метрополис")
     await callback.message.answer(text=metropolis_text, reply_markup=reg_intimissimi_kb())
     
