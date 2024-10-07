@@ -271,6 +271,9 @@ def quest_kb():
     builder.button(
         text="Задание 4", callback_data="Задание 4"
     )
+    builder.button(
+        text="Главное меню", callback_data="Главное меню"
+    )
 
     builder.adjust(1)
     return builder.as_markup()
