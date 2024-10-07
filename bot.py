@@ -44,7 +44,7 @@ async def intimissimi(callback: CallbackQuery, state: FSMContext):
     
     await state.set_state(Register.fio)
     await state.update_data(username=callback.message.from_user.username, tg_id=callback.message.from_user.id, types="intimissimi")
-    await callback.message.answer(text="Расскажите немного о себе. Введите своё ФИО")
+    await callback.message.answer(text="Введите ваше ФИО полностью")
 
 @dp.callback_query(F.data == "Интершарм")
 async def intersharm(callback: CallbackQuery, state: FSMContext):
@@ -73,7 +73,7 @@ async def reg_age(message: Message, state: FSMContext) -> None:
 async def reg_city(message: Message, state: FSMContext) -> None:
     await state.update_data(city=message.text)
     await state.set_state(Register.mail)
-    await message.answer(text="Введите свою электронную почту")
+    await message.answer(text="Введите свою электронную почту (строчными «маленькими» буквами)")
 
 @dp.message(Register.mail)
 async def reg_mail(message: Message, state: FSMContext) -> None:
