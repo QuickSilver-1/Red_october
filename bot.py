@@ -54,7 +54,7 @@ async def intersharm(callback: CallbackQuery, state: FSMContext):
         await callback.message.answer(text="Вы уже зарегестрированы на это мероприятие")
     else:
         await state.set_state(Register.fio)
-        await state.update_data(username=callback.message.from_user.username, tg_id=callback.message.from_user.id, types="intersharm")
+        await state.update_data(username=callback.message.from_user.username, tg_id=callback.message.from_user.id, types="intersharm", place="")
         await callback.message.answer(text="Расскажите немного о себе. Введите своё ФИО")
 
 @dp.message(Register.fio)
